@@ -6,17 +6,33 @@ interface KeyboardProps {
   currentWord: string[];
   renderKeyColor: (value: string) => string;
   submitWord: () => void;
+  row: number;
+  setBoard: React.Dispatch<React.SetStateAction<string[][]>>;
 }
 
 const Keyboard = (props: KeyboardProps) => {
-  const { setCurrentWord, currentWord, renderKeyColor, submitWord } = props;
+  const {
+    setCurrentWord,
+    currentWord,
+    renderKeyColor,
+    submitWord,
+    row,
+    setBoard,
+  } = props;
 
   const renderKeys = (keys: string[]) => {
     return keys.map((key, index) => {
       return (
         <button
           onClick={() => {
-            currentWord.length < 5 && setCurrentWord([...currentWord, key]);
+            if (currentWord.length < 5) {
+              setCurrentWord((prev) => [...prev, key]);
+              setBoard((prev) => {
+                const temp = [...prev];
+                temp[row][currentWord.length] = key;
+                return temp;
+              });
+            }
           }}
           key={index}
           className={`uppercase  px-5 py-5 rounded-md  font-medium
@@ -44,8 +60,14 @@ const Keyboard = (props: KeyboardProps) => {
         {renderKeys(thirdRow)}
         <button
           onClick={() => {
-            currentWord.length > 0 &&
+            if (currentWord.length > 0) {
+              setBoard((prev) => {
+                const temp = [...prev];
+                temp[row][currentWord.length - 1] = "";
+                return temp;
+              });
               setCurrentWord((prev) => [...prev].slice(0, -1));
+            }
           }}
           className="flex-1 w-full flex justify-center  uppercase bg-colorKeys  py-5 rounded-md  font-medium"
         >

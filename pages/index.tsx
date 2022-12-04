@@ -24,11 +24,13 @@ export default function Home() {
     else return "bg-colorKeys";
   };
 
-  const boardColumnColor = (value: string): string => {
-    if (disabledKeys.includes(value)) return "bg-colorDisabled";
-    else if (correctlyPlaced.includes(value)) return "bg-colorCorrect";
-    else if (inCorrectlyPlaced.includes(value)) return "bg-colorPresent2";
-    else return "bg-transparent border-2 border-colorDisabled";
+  const boardColumnColor = (value: string, pos: number): string => {
+    if (pos != row) {
+      if (disabledKeys.includes(value)) return "bg-colorDisabled";
+      else if (correctlyPlaced.includes(value)) return "bg-colorCorrect";
+      else if (inCorrectlyPlaced.includes(value)) return "bg-colorPresent2";
+    }
+    return "bg-transparent border-2 border-colorDisabled";
   };
 
   const submitWord = (): void => {
@@ -37,7 +39,6 @@ export default function Home() {
 
     currentWord.forEach((letter, index) => {
       if (letter === word[index]) {
-        console.log(letter);
         setCorrectlyPlaced((prev) => [...prev, letter]);
       } else if (letter != word[index] && word.includes(letter)) {
         setinCorrectlyPlaced((prev) => [...prev, letter]);
@@ -64,6 +65,8 @@ export default function Home() {
           currentWord={currentWord}
           renderKeyColor={renderKeyColor}
           submitWord={submitWord}
+          row={row}
+          setBoard={setBoard}
         />
       </section>
     </main>
