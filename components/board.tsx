@@ -1,13 +1,13 @@
 interface BoardProps {
-  board: string[];
+  board: string[][];
   boardColumnColor: (value: string) => string;
 }
 
 const Board = (props: BoardProps) => {
   const { board, boardColumnColor } = props;
 
-  const renderColoumns = () => {
-    return board.map((val, index) => {
+  const renderColoumns = (pos: number) => {
+    return board[pos].map((val, index) => {
       return (
         <div
           key={index}
@@ -20,9 +20,18 @@ const Board = (props: BoardProps) => {
     });
   };
 
+  const renderRows = (list: (pos: number) => JSX.Element[], pos: number) => {
+    return <div className="grid gap-1 grid-cols-5">{list(pos)}</div>;
+  };
+
   return (
-    <div className="grid gap-1 grid-cols-5 h-full w-full my-5 max-w-[18rem]">
-      {renderColoumns()}
+    <div className=" h-full w-full my-5 max-w-[18rem]">
+      {renderRows(renderColoumns, 0)}
+      {renderRows(renderColoumns, 1)}
+      {renderRows(renderColoumns, 2)}
+      {renderRows(renderColoumns, 3)}
+      {renderRows(renderColoumns, 4)}
+      {renderRows(renderColoumns, 5)}
     </div>
   );
 };

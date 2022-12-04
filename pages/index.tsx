@@ -9,12 +9,14 @@ type WordTupple = [string, string, string, string, string];
 
 export default function Home() {
   const [word, setWord] = useState<WordTupple>(["h", "a", "s", "t", "e"]);
-  const [board, setBoard] = useState<string[]>(defaultBoard);
+  const [board, setBoard] = useState<string[][]>(defaultBoard);
   const [currentWord, setCurrentWord] = useState<string[]>([]);
   const [correctlyPlaced, setCorrectlyPlaced] = useState<string[]>([]);
   const [inCorrectlyPlaced, setinCorrectlyPlaced] = useState<string[]>([]);
   const [disabledKeys, setDisabledKeys] = useState<string[]>([]);
+  const [row, setRow] = useState<number>(0);
 
+  // rendering background colors
   const renderKeyColor = (value: string): string => {
     if (disabledKeys.includes(value)) return "bg-colorDisabled";
     else if (correctlyPlaced.includes(value)) return "bg-colorCorrect";
@@ -30,6 +32,7 @@ export default function Home() {
   };
 
   const submitWord = (): void => {
+    if (row > 6) alert("you lost dumbass");
     if (word.join("") === currentWord.join("")) alert("they are same");
 
     currentWord.forEach((letter, index) => {
@@ -44,6 +47,7 @@ export default function Home() {
     });
 
     setCurrentWord([]);
+    setRow((prev) => prev + 1);
   };
 
   return (
