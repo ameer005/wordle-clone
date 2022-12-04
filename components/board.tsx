@@ -1,6 +1,6 @@
 interface BoardProps {
   board: string[][];
-  boardColumnColor: (value: string, pos: number) => string;
+  boardColumnColor: (value: string, pos: number, index: number) => string;
 }
 
 const Board = (props: BoardProps) => {
@@ -12,7 +12,7 @@ const Board = (props: BoardProps) => {
         <div
           key={index}
           className={`items-center uppercase justify-center text-3xl font-bold h-14 w-full flex
-          ${boardColumnColor(val, pos)}`}
+          ${boardColumnColor(val, pos, index)}`}
         >
           {val}
         </div>

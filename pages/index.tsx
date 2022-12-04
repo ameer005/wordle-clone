@@ -4,17 +4,21 @@ import Header from "../components/header";
 import Keyboard from "../components/keyboard";
 import Board from "../components/board";
 import defaultBoard from "../utils/defaultBoard";
+import GameOverModal from "../components/gameOverModal";
 
 type WordTupple = [string, string, string, string, string];
+const emptyArr: WordTupple = ["", "", "", "", ""];
 
 export default function Home() {
   const [word, setWord] = useState<WordTupple>(["h", "a", "s", "t", "e"]);
   const [board, setBoard] = useState<string[][]>(defaultBoard);
   const [currentWord, setCurrentWord] = useState<string[]>([]);
-  const [correctlyPlaced, setCorrectlyPlaced] = useState<string[]>([]);
+  const [correctlyPlaced, setCorrectlyPlaced] = useState<WordTupple>(emptyArr);
   const [inCorrectlyPlaced, setinCorrectlyPlaced] = useState<string[]>([]);
   const [disabledKeys, setDisabledKeys] = useState<string[]>([]);
   const [row, setRow] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [isWon, setIswon] = useState<boolean>(false);
 
   // rendering background colors
   const renderKeyColor = (value: string): string => {
@@ -24,22 +28,39 @@ export default function Home() {
     else return "bg-colorKeys";
   };
 
-  const boardColumnColor = (value: string, pos: number): string => {
+  const boardColumnColor = (
+    value: string,
+    pos: number,
+    index: number
+  ): string => {
     if (pos != row) {
       if (disabledKeys.includes(value)) return "bg-colorDisabled";
-      else if (correctlyPlaced.includes(value)) return "bg-colorCorrect";
+      else if (value && value === correctlyPlaced[index])
+        return "bg-colorCorrect";
       else if (inCorrectlyPlaced.includes(value)) return "bg-colorPresent2";
     }
     return "bg-transparent border-2 border-colorDisabled";
   };
 
   const submitWord = (): void => {
-    if (row > 6) alert("you lost dumbass");
-    if (word.join("") === currentWord.join("")) alert("they are same");
+    if (word.join("") === currentWord.join("")) {
+      setIswon(true);
+      setShowModal(true);
+      return;
+    }
+    if (row === 5) {
+      setIswon(false);
+      setShowModal(true);
+      return;
+    }
 
     currentWord.forEach((letter, index) => {
       if (letter === word[index]) {
-        setCorrectlyPlaced((prev) => [...prev, letter]);
+        setCorrectlyPlaced((prev) => {
+          const temp: WordTupple = [...prev];
+          temp[index] = letter;
+          return temp;
+        });
       } else if (letter != word[index] && word.includes(letter)) {
         setinCorrectlyPlaced((prev) => [...prev, letter]);
       } else {
@@ -69,6 +90,14 @@ export default function Home() {
           setBoard={setBoard}
         />
       </section>
+
+      {showModal && (
+        <GameOverModal
+          setShowModal={setShowModal}
+          isWon={isWon}
+          correctWord={word.join("").toUpperCase()}
+        />
+      )}
     </main>
   );
 }
