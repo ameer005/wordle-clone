@@ -1,9 +1,30 @@
-import * as React from "react";
+interface BoardProps {
+  board: string[];
+  boardColumnColor: (value: string) => string;
+}
 
-interface BoardProps {}
+const Board = (props: BoardProps) => {
+  const { board, boardColumnColor } = props;
 
-const Board: React.FC<BoardProps> = (props) => {
-  return <div>i'm mother fuckin board</div>;
+  const renderColoumns = () => {
+    return board.map((val, index) => {
+      return (
+        <div
+          key={index}
+          className={`items-center uppercase justify-center text-3xl font-bold h-14 w-full flex
+          ${boardColumnColor(val)}`}
+        >
+          {val}
+        </div>
+      );
+    });
+  };
+
+  return (
+    <div className="grid gap-1 grid-cols-5 h-full w-full my-5 max-w-[18rem]">
+      {renderColoumns()}
+    </div>
+  );
 };
 
 export default Board;

@@ -1,9 +1,11 @@
-import * as React from "react";
-
 interface HeaderProps {}
 
-const Header: React.FunctionComponent<HeaderProps> = (props) => {
-  return <div>I'm header</div>;
+const Header = ({}: HeaderProps) => {
+  return (
+    <header className="flex justify-center py-4 font-bold text-4xl border-b border-colorBoarder">
+      Wordle
+    </header>
+  );
 };
 
 export default Header;
