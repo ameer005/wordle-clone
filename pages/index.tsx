@@ -113,10 +113,10 @@ export default function Home() {
 
   return (
     <main className=" flex flex-col min-h-screen px-10 xl:px-4 pb-6 text-xs ">
-      <section className="mb-4">
+      <section>
         <Header />
       </section>
-      <section className="flex-1 flex justify-center">
+      <section className="flex items-center justify-center py-6 flex-1">
         <Board
           incorrectlyPlaced={incorrectlyPlaced}
           board={board}

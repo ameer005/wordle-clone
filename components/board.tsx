@@ -12,7 +12,7 @@ const Board = (props: BoardProps) => {
       return (
         <div
           key={index}
-          className={`items-center uppercase justify-center text-3xl font-bold h-14 w-full flex
+          className={`items-center uppercase justify-center text-3xl font-bold h-16 w-full flex
           ${
             val && incorrectlyPlaced[pos][index] === val
               ? "bg-colorPresent2"
@@ -30,7 +30,7 @@ const Board = (props: BoardProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 h-full w-full my-5 xl:my-3 max-w-[18rem]">
+    <div className="flex flex-col gap-1 h-full w-full  max-w-[20.5rem]">
       {renderRows(renderColoumns, 0)}
       {renderRows(renderColoumns, 1)}
       {renderRows(renderColoumns, 2)}

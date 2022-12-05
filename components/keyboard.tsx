@@ -35,7 +35,7 @@ const Keyboard = (props: KeyboardProps) => {
             }
           }}
           key={index}
-          className={`uppercase w-12 py-5 xl:py-4 rounded-md  font-medium
+          className={`uppercase w-12 py-5 xl:py-4 xl:text-sm rounded-md  font-medium
           ${renderKeyColor(key)}`}
         >
           {key}
@@ -59,7 +59,7 @@ const Keyboard = (props: KeyboardProps) => {
           onClick={() => {
             currentWord.length === 5 && submitWord();
           }}
-          className="px-2 flex-1 w-full uppercase bg-colorKeys  py-5 xl:py-4 rounded-md  font-medium"
+          className="px-2 flex-1 w-full uppercase bg-colorKeys  py-5 xl:py-4 xl:text-sm rounded-md  font-medium"
         >
           Enter
         </button>
@@ -75,7 +75,7 @@ const Keyboard = (props: KeyboardProps) => {
               setCurrentWord((prev) => [...prev].slice(0, -1));
             }
           }}
-          className="px-2 flex-1 w-full flex justify-center  uppercase bg-colorKeys  py-5 xl:py-4 rounded-md  font-medium"
+          className="px-2 flex-1 w-full flex justify-center  uppercase bg-colorKeys  py-5 xl:py-4 xl:text-sm rounded-md  font-medium"
         >
           <BsBackspace className="h-4 w-4" />
         </button>
