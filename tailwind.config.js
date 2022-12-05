@@ -8,6 +8,13 @@ module.exports = {
     fontFamily: {
       os: ['"Open Sans", "sans-serif"'],
     },
+    screens: {
+      xl: { max: "600px" },
+      lg: { max: "850px" },
+      md: { max: "650px" },
+      sm: { max: "500px" },
+      xs: { max: "340px" },
+    },
     extend: {
       colors: {
         colorBg: "#212121",

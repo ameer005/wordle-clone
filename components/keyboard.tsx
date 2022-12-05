@@ -35,7 +35,7 @@ const Keyboard = (props: KeyboardProps) => {
             }
           }}
           key={index}
-          className={`uppercase  px-5 py-5 rounded-md  font-medium
+          className={`uppercase w-12 py-5 xl:py-4 rounded-md  font-medium
           ${renderKeyColor(key)}`}
         >
           {key}
@@ -45,15 +45,21 @@ const Keyboard = (props: KeyboardProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 items-center w-full max-w-[32rem]">
-      <div className="flex gap-1">{renderKeys(firstRow)}</div>
-      <div className="flex gap-1">{renderKeys(secondRow)}</div>
-      <div className="flex gap-1 w-full">
+    <div className="1 items-center w-full max-w-[32rem]">
+      <div className="flex justify-center gap-1 mb-1">
+        {renderKeys(firstRow)}
+      </div>
+      <div className="flex justify-center gap-1 mb-1">
+        <div className="h-2 w-2"></div>
+        {renderKeys(secondRow)}
+        <div className="h-2 w-2"></div>
+      </div>
+      <div className="flex justify-center gap-1 w-full">
         <button
           onClick={() => {
             currentWord.length === 5 && submitWord();
           }}
-          className="flex-1 w-full uppercase bg-colorKeys  py-5 rounded-md  font-medium"
+          className="px-2 flex-1 w-full uppercase bg-colorKeys  py-5 xl:py-4 rounded-md  font-medium"
         >
           Enter
         </button>
@@ -69,7 +75,7 @@ const Keyboard = (props: KeyboardProps) => {
               setCurrentWord((prev) => [...prev].slice(0, -1));
             }
           }}
-          className="flex-1 w-full flex justify-center  uppercase bg-colorKeys  py-5 rounded-md  font-medium"
+          className="px-2 flex-1 w-full flex justify-center  uppercase bg-colorKeys  py-5 xl:py-4 rounded-md  font-medium"
         >
           <BsBackspace className="h-4 w-4" />
         </button>

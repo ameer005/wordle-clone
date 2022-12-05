@@ -1,10 +1,11 @@
 interface BoardProps {
   board: string[][];
   boardColumnColor: (value: string, pos: number, index: number) => string;
+  incorrectlyPlaced: string[][];
 }
 
 const Board = (props: BoardProps) => {
-  const { board, boardColumnColor } = props;
+  const { board, boardColumnColor, incorrectlyPlaced } = props;
 
   const renderColoumns = (pos: number) => {
     return board[pos].map((val, index) => {
@@ -12,7 +13,11 @@ const Board = (props: BoardProps) => {
         <div
           key={index}
           className={`items-center uppercase justify-center text-3xl font-bold h-14 w-full flex
-          ${boardColumnColor(val, pos, index)}`}
+          ${
+            val && incorrectlyPlaced[pos][index] === val
+              ? "bg-colorPresent2"
+              : boardColumnColor(val, pos, index)
+          }`}
         >
           {val}
         </div>
@@ -25,7 +30,7 @@ const Board = (props: BoardProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 h-full w-full my-5 max-w-[18rem]">
+    <div className="flex flex-col gap-1 h-full w-full my-5 xl:my-3 max-w-[18rem]">
       {renderRows(renderColoumns, 0)}
       {renderRows(renderColoumns, 1)}
       {renderRows(renderColoumns, 2)}

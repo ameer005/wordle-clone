@@ -4,10 +4,11 @@ interface GamerOverProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   isWon: boolean;
   correctWord?: string;
+  resetGame: () => void;
 }
 
 const GameOverModal = (props: GamerOverProps) => {
-  const { setShowModal, isWon, correctWord } = props;
+  const { isWon, correctWord, resetGame } = props;
   return (
     <div
       // onClick={() => setShowModal(false)}
@@ -28,6 +29,7 @@ const GameOverModal = (props: GamerOverProps) => {
           )}
 
           <button
+            onClick={() => resetGame()}
             className={
               "mt-6 py-2 px-4 bg-colorWhite text-colorBg rounded-lg font-bold"
             }
